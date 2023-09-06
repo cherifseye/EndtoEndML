@@ -1,0 +1,4 @@
+Kind,Model,Precision,Recall,Iteration
+Iris Setosa,Logistic Regression,1.0,1.0,1000
+Iris Versicolor,Logistic Regression,0.6296296296296297,0.38636363636363635,40000
+Iris Virgi,Logistic Regression,0.9215686274509803,0.38636363636363635,1000

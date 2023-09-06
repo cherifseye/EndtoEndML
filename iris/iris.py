@@ -1,4 +1,9 @@
 #Importing Libraries
+import os
+import sys
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.join(script_dir, '..')
+sys.path.insert(0, parent_dir)
 from model import LogisticRegression
 import numpy as np
 import matplotlib.pyplot as plt
@@ -92,7 +97,11 @@ table_data = [
     ["Iris Versicolor", "Logistic Regression", round(loss_versi, 4), precision_versi, recall_versi, 40000],
     ["Iris Virginica", "Logistic Regression", round(loss_virgi, 4), precision_virgi, recall_virgi, 1000]
 ]
-
+result_df = pd.DataFrame(columns=['Kind', 'Model', 'Precision', 'Recall', 'Iteration'])
+result_df = result_df.append({"Kind": "Iris Setosa", "Model": "Logistic Regression", "Precision":precision_itosa, "Recall": recall_itosa, "Iteration":1000}, ignore_index=True)
+result_df = result_df.append({"Kind": "Iris Versicolor", "Model": "Logistic Regression", "Precision":precision_versi, "Recall": recall_versi,"Iteration":40000}, ignore_index=True)
+result_df = result_df.append({"Kind": "Iris Virgi", "Model": "Logistic Regression", "Precision":precision_virgi, "Recall":recall_versi ,"Iteration":1000}, ignore_index=True)
+result_df = result_df.to_csv("iris/Irisresults.csv", index=False)
 # Format and print the table
 table = tabulate(table_data, headers="firstrow", tablefmt="fancy_grid")
 print(table)

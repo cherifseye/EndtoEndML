@@ -28,9 +28,6 @@ print("PLotting Hsitogram of %s", filename)
 diabetes.hist(figsize=(12, 8), bins=50)
 plt.show()
 print("Histogram plot Closed")
-num_columns = len(diabetes.columns) - 1  # Exclude the 'Outcome' column
-num_rows = (num_columns + 1) // 2  # Calculate the number of rows (rounded up)
-
 
 print("Show Box plotting with the outcome: ")
 box_plotting(diabetes, 'Outcome')

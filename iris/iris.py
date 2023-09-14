@@ -101,7 +101,7 @@ result_df = pd.DataFrame(columns=['Kind', 'Model', 'Precision', 'Recall', 'Itera
 result_df = result_df.append({"Kind": "Iris Setosa", "Model": "Logistic Regression", "Precision":precision_itosa, "Recall": recall_itosa, "Iteration":1000}, ignore_index=True)
 result_df = result_df.append({"Kind": "Iris Versicolor", "Model": "Logistic Regression", "Precision":precision_versi, "Recall": recall_versi,"Iteration":40000}, ignore_index=True)
 result_df = result_df.append({"Kind": "Iris Virgi", "Model": "Logistic Regression", "Precision":precision_virgi, "Recall":recall_versi ,"Iteration":1000}, ignore_index=True)
-result_df = result_df.to_csv("iris/Irisresults.csv", index=False)
+#result_df = result_df.to_csv("iris/Irisresults.csv", index=False)
 # Format and print the table
 table = tabulate(table_data, headers="firstrow", tablefmt="fancy_grid")
 print(table)
@@ -116,3 +116,4 @@ y_pred = np.argmax(np.vstack([y_pred_setosa, y_pred_versicolor, y_pred_virginica
 # Calculate accuracy on the test dataset
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy}")
+#%%

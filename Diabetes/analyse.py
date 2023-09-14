@@ -9,6 +9,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.join(script_dir, '..')
 sys.path.insert(0, parent_dir)
 from process import box_plotting
+
 def read_file(filename):
     return pd.read_csv(filename)
 

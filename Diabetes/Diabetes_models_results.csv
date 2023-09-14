@@ -1,5 +1,5 @@
 Model,Accuracy
 Logistic Regression,0.6428571428571429
-Random Forest,0.7207792207792207
-Support Vector Machine,0.7727272727272727
-K-Nearest Neighbors,0.7402597402597403
+Random Forest,0.7597402597402597
+Support Vector Machine,0.7597402597402597
+K-Nearest Neighbors,0.7012987012987013

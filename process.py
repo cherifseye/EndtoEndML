@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import pandas as pd
+
 def box_plotting(dataset, by_):
     num_columns = len(dataset.columns) - 1  
     num_rows = (num_columns + 1) // 2  
@@ -17,3 +19,34 @@ def box_plotting(dataset, by_):
 
     plt.tight_layout()
     plt.show()
+    
+    #The delimier is ';' instead of ','
+def read_file(filename):
+    return pd.read_csv(filename)
+ 
+def changeDelimiter(filename):
+    df = pd.read_csv(filename, delimiter=';')
+    df = df.replace(';', ',', regex=True)
+    df.to_csv(filename, index=False)
+    print("File successfully changed")
+    
+def showInfo(dataset_name, shape=True, head=20, tail=None):
+    if shape:
+        print("displaying shape Information")
+        print(dataset_name.shape)
+    
+    print("Displaying head of Dataset:")
+    print(dataset_name.head(head))
+    
+    if tail is not None:
+        print("Tail of Dataset: ")
+        print(dataset_name.tail(tail))
+    
+    print("Displaying info of Dataset: ")
+    print(dataset_name.info()) 
+    
+    print("Displaying Description of Dataset:")
+    print(dataset_name.describe())  
+    
+    return
+#%%

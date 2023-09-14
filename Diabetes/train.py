@@ -23,7 +23,7 @@ diabetes = read_file('Diabetes/diabetes.csv')
 train_set, test_set = train_test_split(diabetes, test_size=0.2, random_state=42)
 
 # Define the features based on correlation analysis
-selected_features = ['Glucose', 'BMI', 'Age']  # Replace with your relevant features
+selected_features = ['Glucose', 'BMI', 'Age', 'Pregnancies', 'DiabetesPedigreeFunction', 'Insulin']  # Replace with your relevant features
 
 # Prepare the training data
 X_train = train_set[selected_features]

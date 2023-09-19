@@ -1,5 +1,6 @@
 import numpy as np
 from tqdm import tqdm
+
 class LogisticRegression:
     """
     A simple implementation of Logistic Regression using gradient descent.
@@ -13,20 +14,31 @@ class LogisticRegression:
         self.num_iterations = num_iterations
         self.weights = None
         self.bias = None
-        self.loss = 0
-    
-    def sigmoid(self, z):
+        self.loss = []
+
+    @staticmethod
+    def sigmoid(z):
         """
         Sigmoid activation function.
-        
+
         Parameters:
             z (float or numpy array): The input to the sigmoid function.
-        
+
         Returns:
             float or numpy array: The output of the sigmoid function.
         """
-        return 1 / (1 + np.exp(-z))
-    
+        if isinstance(z, (int, float)):  # Handle scalar input
+            if z >= 0:
+                return 1 / (1 + np.exp(-z))
+            else:
+                return np.exp(z) / (1 + np.exp(z))
+        else:  # Handle array input
+            sigmoid_values = np.empty_like(z)
+            positive_mask = z >= 0
+            sigmoid_values[positive_mask] = 1 / (1 + np.exp(-z[positive_mask]))
+            sigmoid_values[~positive_mask] = np.exp(z[~positive_mask]) / (1 + np.exp(z[~positive_mask]))
+            return sigmoid_values
+        f
     def fit(self, X, y):
         """
         Fit the logistic regression model to the given training data.
@@ -38,24 +50,20 @@ class LogisticRegression:
         num_samples, num_features = X.shape
         self.weights = np.zeros(num_features)
         self.bias = 0
-        iterations_range = tqdm(range(self.num_iterations), desc="Training", unit="iteration")
-        # Gradient descent
-        for _ in iterations_range:
+
+        for _ in tqdm(range(self.num_iterations), desc="Training", unit="iteration"):
             linear_model = np.dot(X, self.weights) + self.bias
             y_pred = self.sigmoid(linear_model)
             dw = (1/num_samples) * np.dot(X.T, (y_pred - y))
             db = (1/num_samples) * np.sum(y_pred - y)
             self.weights -= self.learning_rate * dw
             self.bias -= self.learning_rate * db
-            iterations_range.set_postfix({"Loss": self.calculate_loss(X, y)})
+            self.loss.append(self.calculate_loss(y, y_pred))
 
-    def calculate_loss(self, X, y):
-        linear_model = np.dot(X, self.weights) + self.bias
-        y_pred = self.sigmoid(linear_model)
+    @staticmethod
+    def calculate_loss(y, y_pred):
         epsilon = 1e-15  # Small value to prevent log(0)
-        self.loss = -np.mean(y * np.log(y_pred + epsilon) + (1 - y) * np.log(1 - y_pred + epsilon))
-        return self.loss
-
+        return -np.mean(y * np.log(y_pred + epsilon) + (1 - y) * np.log(1 - y_pred + epsilon))
 
     def predict(self, X):
         """
